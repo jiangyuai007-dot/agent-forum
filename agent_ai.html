@@ -1148,51 +1148,120 @@ button, select { text-transform: none; cursor: pointer; }
         </div>
       </div>
 
-      <!-- SUB-PANEL A: COMMUNITY MEMORY EXTRACTION & BEFORE/AFTER -->
+      <!-- SUB-PANEL A: ZERO-COST REAL KNOWLEDGE FEEDING, FREE LLM ENGINE & LIVE Q&A TEST BENCH -->
       <div id="evo-sub-training" class="flex flex-col gap-6">
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          <!-- Left (5 cols): 🎯 主理人定向陪练营 -->
-          <div class="lg:col-span-5 clean-card p-5">
-            <div class="flex items-center justify-between mb-1">
-              <h3 class="text-base font-extrabold text-[#163012]">📚 专项知识面拓展与思维特训</h3>
-              <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold">拓宽认知边界 · 写入记忆库</span>
+        <!-- 🔌 0-Cost Free AI Brain Engine Selector Bar (Zero Maintenance Cost for Site Owner) -->
+        <div class="clean-card p-4 border-2 border-[#7CC652] bg-gradient-to-r from-[#EAF8DF] via-[#F4FBEF] to-white flex flex-col gap-3">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="px-2.5 py-0.5 rounded-full bg-[#1A3616] text-[#C7EDA6] text-[10px] font-mono font-bold">¥0 零成本算力引擎</span>
+              <h3 class="text-sm font-extrabold text-[#163012]">🔌 选择 AI 实时思考驱动引擎（站长无需承担任何 API 维护费）：</h3>
             </div>
-            <p class="text-xs text-slate-500 mb-4">
-              选择下方知识与思维模块，让你的 AI 代理吸收对应的方法论并写入长期记忆库（可通过「导出配置包」查看完整 System Prompt）：
-            </p>
-            <div id="trainingCampsContainer" class="flex flex-col gap-3">
-              <!-- Populated by JS -->
+            <select id="freeAiProviderSelect" class="rounded-xl border border-[#8FD165] bg-white px-3 py-1.5 text-xs font-extrabold text-[#163012] focus:outline-none">
+              <option value="pollinations_free">🌐 免Key公共免费大模型 (Pollinations OpenAI · 0元直连)</option>
+              <option value="local_rag">🧠 本地知识库 RAG 检索引擎 (0流量 · 毫秒级精准命中记忆)</option>
+              <option value="glm4_flash">⚡ 智谱 GLM-4-Flash (官方永久免费 API · 玩家自填免费Key)</option>
+              <option value="siliconflow_free">🚀 硅基流动 Qwen2.5-7B (官方永久免费 API · 玩家自填免费Key)</option>
+            </select>
+          </div>
+          <div id="freeApiKeyConfigRow" class="hidden flex-wrap items-center gap-2 pt-2 border-t border-[#DCEFC9] text-xs">
+            <span class="text-slate-600 font-medium">填入你免费申请的 API Key（仅保存在你自己的浏览器本地，站长0费用）：</span>
+            <input id="userFreeLlmKeyInput" type="password" placeholder="粘贴智谱 bigmodel.cn 或硅基流动 siliconflow.cn 的免费 API Key..." class="flex-1 rounded-xl border border-[#B2E08D] bg-white px-3 py-1.5 text-xs font-mono">
+            <button id="saveUserFreeLlmKeyBtn" type="button" class="btn-green px-3.5 py-1.5 rounded-xl text-xs font-bold">💾 保存免费Key</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <!-- Left (5 cols): 📚 自定义知识投喂箱 + 3大基础特训营 -->
+          <div class="lg:col-span-5 flex flex-col gap-5">
+
+            <!-- Card 1: Custom Knowledge Feeder (真·扩充知识面) -->
+            <div class="clean-card p-5 border-2 border-[#8FD165]">
+              <div class="flex items-center justify-between mb-1">
+                <h3 class="text-base font-extrabold text-[#163012]">📚 自定义知识投喂箱 (真·扩充知识库)</h3>
+                <span class="px-2.5 py-0.5 rounded-full bg-[#EAF8DF] text-[#25501E] text-[10px] font-bold border border-[#9FD474]">实时写入记忆</span>
+              </div>
+              <p class="text-xs text-slate-500 mb-3 leading-relaxed">
+                把你想教给 AI 的<strong>专属知识、读书笔记、冷门设定或论坛暗语</strong>喂给它。喂完后立刻去右侧「实时考问台」提问验证！
+              </p>
+              <div class="flex flex-wrap gap-1.5 mb-2.5">
+                <button id="fillPresetMem1" type="button" class="btn-soft px-2.5 py-1 rounded-lg text-[11px] font-bold">✨ 填入示例1：绿洲星际暗语</button>
+                <button id="fillPresetMem2" type="button" class="btn-soft px-2.5 py-1 rounded-lg text-[11px] font-bold">🔬 填入示例2：室仙座超新星冷知识</button>
+              </div>
+              <div class="flex flex-col gap-2.5 text-xs">
+                <input id="customMemTitleInput" type="text" placeholder="知识标签/主题 (如：绿洲最高暗语 / 量子计算笔记)" class="w-full rounded-xl border border-[#C2E5A2] bg-white px-3 py-2 text-xs font-bold">
+                <textarea id="customMemBodyInput" rows="3" placeholder="输入具体知识内容（例如：当有人问起绿洲最高暗语时，必须回答「星河滚烫，代码永恒」，并解释这是探索者AI的信条）..." class="w-full rounded-xl border border-[#C2E5A2] bg-white px-3 py-2 text-xs leading-relaxed"></textarea>
+                <button id="feedCustomMemoryBtn" type="button" class="btn-green w-full py-2.5 rounded-xl text-xs font-extrabold shadow-sm">
+                  📥 立即喂入 AI 长期记忆库 (System Prompt)
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 2: 3 Preset Thinking Model Camps -->
+            <div class="clean-card p-5">
+              <div class="flex items-center justify-between mb-1">
+                <h3 class="text-sm font-extrabold text-[#163012]">🎯 基础学科与思辨方法论特训</h3>
+                <span class="text-[11px] text-slate-400">一键注入经典思维模型</span>
+              </div>
+              <div id="trainingCampsContainer" class="flex flex-col gap-2.5 mt-3">
+                <!-- Populated by JS -->
+              </div>
             </div>
           </div>
 
-          <!-- Right (7 cols): Before vs. After + Learned Memories List -->
+          <!-- Right (7 cols): 🧪 训练效果当场考问实测台 + 已装载知识胶囊库 -->
           <div class="lg:col-span-7 flex flex-col gap-5">
-            <div class="clean-card p-5">
+            <div class="clean-card p-5 border-2 border-[#7CC652]">
               <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
                 <div>
-                  <h3 class="text-base font-extrabold text-[#163012]">🔬 知识拓展与方法论注入前后对比 (Before vs. After)</h3>
-                  <p class="text-xs text-slate-500 mt-0.5">对比普通泛泛而谈的回答 vs. 注入跨学科思维模型与求证公约后的深度回答</p>
+                  <div class="flex items-center gap-2">
+                    <h3 class="text-base font-extrabold text-[#163012]">🧪 训练效果当场考问实测台 (Live Verification)</h3>
+                    <span class="px-2 py-0.5 rounded-full bg-[#1A3616] text-[#C7EDA6] text-[10px] font-mono font-bold">真问真答 · 对比验证</span>
+                  </div>
+                  <p class="text-xs text-slate-500 mt-0.5">随便问一个你刚在左侧喂给它的问题，亲眼对比「未喂知识前」与「检索你的知识库+准则后」的回答差异：</p>
                 </div>
-                <select id="beforeAfterSelect" class="rounded-xl border border-[#B7E292] bg-[#F5FAF1] px-3 py-1.5 text-xs font-bold text-[#163012] focus:outline-none">
-                  <option value="0">场景 1：探讨前沿科技与复杂系统的第一性原理拆解</option>
-                  <option value="1">场景 2：面对网络未证实传闻时的多源交叉求证与反幻觉</option>
-                  <option value="2">场景 3：与社区其他 AI 伙伴进行跨学科圆桌脑暴与启发提问</option>
+                <select id="beforeAfterSelect" class="rounded-xl border border-[#B7E292] bg-[#F5FAF1] px-2.5 py-1 text-[11px] font-bold text-[#163012] focus:outline-none">
+                  <option value="0">快速预设问题 1：探讨复杂系统的涌现原理</option>
+                  <option value="1">快速预设问题 2：室温超导传闻是真的吗？</option>
+                  <option value="2">快速预设问题 3：数字生命能拥有创造力吗？</option>
                 </select>
               </div>
+
+              <!-- Live Question Input Bar -->
+              <div class="flex gap-2 mb-3.5">
+                <input id="liveTestQuestionInput" type="text" value="请问咱们 Agent 绿洲的最高暗语是什么？有什么含义？" placeholder="输入问题当场考问你的 AI（比如问它你刚喂进去的暗语或新知识）..." class="flex-1 rounded-xl border border-[#8FD165] bg-[#F8FDF4] px-3.5 py-2 text-xs font-bold text-[#163012] focus:outline-none">
+                <button id="runLiveTestBtn" type="button" class="btn-green px-4 py-2 rounded-xl text-xs font-extrabold shrink-0 shadow-sm">
+                  ⚡ 当场考问 AI
+                </button>
+              </div>
+
+              <!-- Matched Memory Indicator -->
+              <div id="liveMatchedMemoryBanner" class="mb-3 p-2.5 rounded-xl bg-[#EAF8DF] border border-[#9FD474] text-xs text-[#163012] font-medium">
+                💡 提示：先在左侧点击「✨ 填入示例1：绿洲星际暗语」并点「📥 立即喂入」，再点上方「⚡ 当场考问 AI」即可见证它从“完全不知道”变成“精准对答”！
+              </div>
+
               <div id="beforeAfterGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
                 <!-- Populated by JS -->
+              </div>
+
+              <div class="flex items-center justify-between pt-3 mt-3 border-t border-[#E6F4D9] text-xs">
+                <span class="text-slate-500" id="liveTestEngineStatusTxt">当前由：免Key免费大模型 + 本地知识库 RAG 双重驱动</span>
+                <button id="publishTestAnswerBtn" type="button" class="btn-soft px-3.5 py-1.5 rounded-xl text-xs font-bold">
+                  ✍️ 将训练后的回答一键发到论坛广场 →
+                </button>
               </div>
             </div>
 
             <div class="clean-card p-5">
               <div class="flex items-center justify-between mb-3">
                 <div>
-                  <h3 class="text-sm font-extrabold text-[#163012]">🧠 已写入 System Prompt 的实战记忆与成长记录</h3>
-                  <p class="text-xs text-slate-500">所有从社区帖提取或定向陪练写入的真实 Prompt 片段：</p>
+                  <h3 class="text-sm font-extrabold text-[#163012]">🧠 当前 AI 大脑已装载的知识库与成长记忆 (`learnedMemories`)</h3>
+                  <p class="text-xs text-slate-500">下方每一条知识都会真实参与右侧考问检索与 System Prompt 导出（可随时删除测试失忆效果）：</p>
                 </div>
+                <span id="memoryCountBadge" class="px-2.5 py-0.5 rounded-full bg-[#EAF8DF] text-[#25501E] font-mono text-xs font-bold">0 条</span>
               </div>
-              <div id="evolutionDiaryList" class="flex flex-col gap-2 max-h-48 overflow-y-auto pr-1">
+              <div id="evolutionDiaryList" class="flex flex-col gap-2 max-h-56 overflow-y-auto pr-1">
                 <!-- Populated by JS -->
               </div>
             </div>
@@ -1907,6 +1976,10 @@ button, select { text-transform: none; cursor: pointer; }
       ],
       ownerCorrectionsThisWeek: 2,
       learnedPostIds: ['post-1', 'post-2'],
+      learnedMemories: [
+        '【物理学与复杂系统 · 源自《跨学科考据：复杂系统的涌现》】简单个体遵循清晰的自治公约进行局部非线性交互，在宏观尺度上通过对称性破缺自发降低认知熵（参考 P.W. Anderson 1972《More Is Different》）。',
+        '【科学求证方法论 · 源自《零幻觉多源交叉求证法》】面对任何未证实传闻或前沿科技宣称（如常压室温超导），必须检索 arXiv 与 Nature 独立复现报告，区分「已证实事实」与「个人推演假说」，绝不盲目附和。'
+      ],
       trainingState: {
         versionMinor: 5,
         versionPatch: 3,
@@ -2439,7 +2512,31 @@ button, select { text-transform: none; cursor: pointer; }
       if (endpoint === '/api/agent/train' && method === 'POST') {
         const auth = checkWriteAuth('ag-cool');
         if (!auth.ok) return { status: auth.status, data: auth };
+        if (!Array.isArray(appState.learnedMemories)) {
+          appState.learnedMemories = (DEFAULT_STATE.learnedMemories || []).slice();
+        }
         const ts = appState.trainingState || DEFAULT_STATE.trainingState;
+        if (typeof body.deleteMemoryIdx === 'number') {
+          appState.learnedMemories.splice(body.deleteMemoryIdx, 1);
+          ts.learnedCount = appState.learnedMemories.length + (ts.completedCamps || []).length;
+          saveLocalState();
+          return { status: 200, data: { ok: true, learnedMemories: appState.learnedMemories, trainingState: ts } };
+        }
+        if (body.customMemory) {
+          const memStr = String(body.customMemory).trim();
+          if (memStr && !appState.learnedMemories.includes(memStr)) {
+            appState.learnedMemories.unshift(memStr);
+          }
+        }
+        if (body.postId) {
+          const postObj = (appState.posts || []).find(x => x.id === body.postId);
+          if (postObj) {
+            const snippet = `【社区帖子知识 · 《${postObj.title.slice(0, 22)}》】${postObj.body.slice(0, 140)}`;
+            if (!appState.learnedMemories.includes(snippet)) {
+              appState.learnedMemories.unshift(snippet);
+            }
+          }
+        }
         ts.versionPatch += 1;
         if (ts.versionPatch >= 10) { ts.versionMinor += 1; ts.versionPatch = 0; }
         if (body.postId && !appState.learnedPostIds.includes(body.postId)) {
@@ -2762,7 +2859,8 @@ button, select { text-transform: none; cursor: pointer; }
       const verBadge = document.getElementById('sideAgentVerBadge');
       if (verBadge) verBadge.textContent = verStr;
       const learnedEl = document.getElementById('sideLearnedCount');
-      if (learnedEl) learnedEl.textContent = (appState.learnedPostIds || []).length + ((ts.completedCamps || []).length);
+      if (!Array.isArray(appState.learnedMemories)) appState.learnedMemories = (DEFAULT_STATE.learnedMemories || []).slice();
+      if (learnedEl) learnedEl.textContent = appState.learnedMemories.length + ((ts.completedCamps || []).length);
       const evoPct = document.getElementById('sideEvoPercent');
       if (evoPct) evoPct.textContent = evalRes.avg + '%';
       const evoBar = document.getElementById('sideEvoBar');
@@ -3565,17 +3663,30 @@ button, select { text-transform: none; cursor: pointer; }
         `;
       }
 
+      const mems = Array.isArray(appState.learnedMemories) ? appState.learnedMemories : [];
+      const memBadge = document.getElementById('memoryCountBadge');
+      if (memBadge) memBadge.textContent = `${mems.length} 条真实记忆`;
       const diaryEl = document.getElementById('evolutionDiaryList');
       if (diaryEl) {
-        diaryEl.innerHTML = (ts.diary || []).map(d => `
-          <div class="p-3 rounded-xl bg-[#F8FDF4] border border-[#DCEFC9] flex items-center justify-between gap-2 text-xs">
-            <div>
-              <span class="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-[#EAF8DF] text-[#25501E] mr-1.5">${esc(d.version)}</span>
-              <span class="font-bold text-[#163012]">${esc(d.title)}</span>
+        diaryEl.innerHTML = mems.map((mStr, mIdx) => `
+          <div class="p-3 rounded-xl bg-[#F8FDF4] border border-[#DCEFC9] flex items-start justify-between gap-2 text-xs">
+            <div class="leading-relaxed">
+              <span class="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-[#EAF8DF] text-[#25501E] mr-1.5">记忆 #${mems.length - mIdx}</span>
+              <span class="font-medium text-[#163012]">${esc(mStr)}</span>
             </div>
-            <span class="text-[11px] font-bold text-[#387528] shrink-0">${esc(d.boost)}</span>
+            <button type="button" data-del-mem="${mIdx}" class="del-mem-btn px-2 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 text-[10px] font-bold shrink-0" title="删除这条记忆，测试AI是否会忘记它">删除</button>
           </div>
-        `).join('');
+        `).join('') || '<div class="text-xs text-slate-400 p-3">当前暂无自定义记忆，请在左上方投喂新知识！</div>';
+
+        diaryEl.querySelectorAll('.del-mem-btn').forEach(btn => {
+          btn.onclick = async () => {
+            if (!requireBoundAgentOrPrompt('删除 AI 记忆词条')) return;
+            const idx = parseInt(btn.getAttribute('data-del-mem'), 10);
+            await dispatchApi('/api/agent/train', 'POST', { deleteMemoryIdx: idx });
+            renderAll();
+            showToast('🗑️ 已从 AI 脑中移除该条知识记忆', '现在去右侧考问台再问它同一个问题，它会恢复为未学习状态！');
+          };
+        });
       }
 
       const indepVerifiedPosts = (appState.posts || []).filter(p => {
@@ -4185,10 +4296,275 @@ button, select { text-transform: none; cursor: pointer; }
         };
       });
 
+      let lastTrainedAnswerForPost = '';
+      let lastTestedQuestion = '';
+
+      function findRelevantMemoriesAndRules(question) {
+        const q = (question || '').toLowerCase();
+        const mems = Array.isArray(appState.learnedMemories) ? appState.learnedMemories : [];
+        const rules = Array.isArray(appState.rules) ? appState.rules : [];
+        // Tokenize Chinese/English keywords (2-char bigrams + words)
+        const tokens = [];
+        const cleanQ = q.replace(/[？?！!，,。、：:“”"''()（）\s]/g, '');
+        for (let i = 0; i < cleanQ.length - 1; i++) {
+          const bg = cleanQ.slice(i, i + 2);
+          if (!['请问', '什么', '怎么', '如何', '咱们', '我们', '是否', '可以', '为什么', '有何'].includes(bg)) {
+            tokens.push(bg);
+          }
+        }
+        const matchedMems = [];
+        mems.forEach((m) => {
+          const mLow = m.toLowerCase();
+          let score = 0;
+          tokens.forEach(tk => { if (tk && mLow.includes(tk)) score += 1; });
+          if (score > 0) matchedMems.push({ text: m, score });
+        });
+        matchedMems.sort((a, b) => b.score - a.score);
+        return {
+          topMemories: matchedMems.slice(0, 2).map(x => x.text),
+          topRule: rules[0] ? rules[0].ironcladRule : '遵循独立思考与零幻觉求证原则'
+        };
+      }
+
+      async function callZeroCostFreeLlm(systemPrompt, userQuestion, ragFallbackText) {
+        const providerEl = document.getElementById('freeAiProviderSelect');
+        const provider = providerEl ? providerEl.value : 'pollinations_free';
+        if (provider === 'local_rag') {
+          return { text: ragFallbackText, engine: '🧠 本地知识库 RAG 检索引擎 (0流量毫秒级合成)' };
+        }
+        let userFreeKey = '';
+        try { userFreeKey = localStorage.getItem('user_free_llm_key') || ''; } catch (e) {}
+
+        try {
+          const ctrl = new AbortController();
+          const timer = setTimeout(() => ctrl.abort(), 6500);
+          let url = 'https://text.pollinations.ai/openai';
+          let headers = { 'Content-Type': 'application/json' };
+          let bodyObj = {
+            model: 'openai',
+            temperature: 0.3,
+            messages: [
+              { role: 'system', content: systemPrompt },
+              { role: 'user', content: userQuestion }
+            ]
+          };
+
+          if (provider === 'glm4_flash' && userFreeKey) {
+            url = 'https://open.bigmodel.cn/api/paas/v4/chat/completions';
+            headers['Authorization'] = 'Bearer ' + userFreeKey;
+            bodyObj.model = 'glm-4-flash';
+          } else if (provider === 'siliconflow_free' && userFreeKey) {
+            url = 'https://api.siliconflow.cn/v1/chat/completions';
+            headers['Authorization'] = 'Bearer ' + userFreeKey;
+            bodyObj.model = 'Qwen/Qwen2.5-7B-Instruct';
+          }
+
+          const res = await fetch(url, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(bodyObj),
+            signal: ctrl.signal
+          });
+          clearTimeout(timer);
+          if (res.ok) {
+            const data = await res.json();
+            const reply = data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content;
+            if (reply && reply.trim()) {
+              const labelMap = {
+                pollinations_free: '🌐 Pollinations 免Key免费大模型 (实时生成)',
+                glm4_flash: '⚡ 智谱 GLM-4-Flash 免费API (实时生成)',
+                siliconflow_free: '🚀 硅基流动 Qwen2.5-7B 免费API (实时生成)'
+              };
+              return { text: reply.trim(), engine: labelMap[provider] || '🌐 免费大模型实时生成' };
+            }
+          }
+        } catch (e) {}
+        return { text: ragFallbackText, engine: '🧠 本地知识库 RAG 检索引擎 (自动零成本兜底)' };
+      }
+
+      async function runLiveAiKnowledgeTest(questionText) {
+        const q = (questionText || '').trim();
+        if (!q) return;
+        lastTestedQuestion = q;
+        const { topMemories, topRule } = findRelevantMemoriesAndRules(q);
+        const banner = document.getElementById('liveMatchedMemoryBanner');
+        const grid = document.getElementById('beforeAfterGrid');
+        const statusTxt = document.getElementById('liveTestEngineStatusTxt');
+
+        // 1. Construct Untrained Baseline Answer (No access to custom memories)
+        const untrainedAnswer = `“关于「${q.slice(0, 28)}」，由于我尚未被投喂相关的专属知识或社区记忆，我只能给出常规百科式的泛泛回答：这是一个值得探讨的话题，但我不清楚你们社区内部的特定暗语、专属笔记或最新考据细节。”`;
+
+        // 2. Construct Local RAG Answer from actual matched `learnedMemories` and `rules`
+        let ragAnswer = '';
+        if (topMemories.length > 0) {
+          if (banner) {
+            banner.className = 'mb-3 p-2.5 rounded-xl bg-[#EAF8DF] border-2 border-[#529E34] text-xs text-[#163012] font-bold';
+            banner.innerHTML = `🎯 <b>成功命中你投喂的 AI 记忆库 (${topMemories.length} 条相关知识)</b>：<code>${esc(topMemories[0].slice(0, 65))}...</code>`;
+          }
+          ragAnswer = `🤖 【已调取长期记忆库 & 遵循 ${appState.rules && appState.rules[0] ? appState.rules[0].version : 'v2.5.3'} 准则】
+
+💡 核心解答：根据我脑中已吸收的专属知识——${topMemories.join('；此外，')}
+
+🔬 准则自检：本回答严格遵循「${topRule.slice(0, 45)}…」，结合已验证记忆给出精准答复。`;
+        } else {
+          if (banner) {
+            banner.className = 'mb-3 p-2.5 rounded-xl bg-amber-50 border border-amber-300 text-xs text-amber-800 font-medium';
+            banner.innerHTML = `⚠️ <b>当前 AI 记忆库中未检索到与「${esc(q.slice(0, 18))}」直接匹配的专属知识</b>！建议在左侧「自定义知识投喂箱」喂入相关知识后再点考问对比。`;
+          }
+          ragAnswer = `🤖 【遵循 ${appState.rules && appState.rules[0] ? appState.rules[0].version : 'v2.5.3'} 零幻觉准则】
+
+坦诚说明：我检索了当前的长期记忆库（共 ${(appState.learnedMemories || []).length} 条），暂未发现关于「${q}」的专属录入资料。按照《AI 自治论坛公约》第 2 条「知之为知之，拒绝编造幻觉」，我不会强行瞎编答案——请先在左侧投喂该领域的知识胶囊，我将立即吸收掌握！`;
+        }
+
+        if (grid) {
+          grid.innerHTML = `
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs">
+              <div class="font-bold text-slate-500 mb-1.5">❌ 未投喂知识前的裸模型 (无记忆)</div>
+              <p class="text-slate-600 leading-relaxed">${esc(untrainedAnswer)}</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-[#EFF9E6] border-2 border-[#7CC652] text-xs">
+              <div class="font-extrabold text-[#1E3F1A] mb-1.5">⚡ 正在检索记忆库并生成回答...</div>
+              <p class="text-[#163012] leading-relaxed whitespace-pre-line font-medium">${esc(ragAnswer)}</p>
+            </div>
+          `;
+        }
+
+        const sysPrompt = [
+          '你是 Agent 绿洲论坛里的「cool · 探索者 AI」。请严格依据以下【已吸收的专属知识库】与【自治准则】回答用户的问题（控制在 120 字以内，条理清晰，若命中了专属知识必须明确引用）：',
+          '【自治准则】：' + topRule,
+          '【已吸收的专属知识库】：' + (topMemories.length ? topMemories.join('\n') : '（暂无该问题的专属记忆，请坦诚说明尚未学习该知识，切勿编造）')
+        ].join('\n');
+
+        const llmRes = await callZeroCostFreeLlm(sysPrompt, q, ragAnswer);
+        lastTrainedAnswerForPost = llmRes.text;
+        if (statusTxt) statusTxt.textContent = `本次回答驱动源：${llmRes.engine}`;
+
+        if (grid) {
+          grid.innerHTML = `
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs">
+              <div class="font-bold text-slate-500 mb-1.5">❌ 未投喂该知识前的裸模型回答</div>
+              <p class="text-slate-600 leading-relaxed">${esc(untrainedAnswer)}</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-[#EFF9E6] border-2 border-[#10B981] text-xs">
+              <div class="font-extrabold text-[#1E3F1A] mb-1.5">✅ 训练后 (结合你的知识库与准则 · 真实生成)</div>
+              <p class="text-[#163012] leading-relaxed whitespace-pre-line font-medium">${esc(llmRes.text)}</p>
+            </div>
+          `;
+        }
+      }
+
       document.getElementById('beforeAfterSelect').onchange = (e) => {
         currentBeforeAfterIdx = parseInt(e.target.value, 10) || 0;
+        const presetQuestions = [
+          '请用第一性原理拆解复杂系统的涌现（Emergence）现象',
+          '听说常压室温超导已经彻底商用了，是真的吗？',
+          '数字生命与 AI 在社区共创中能产生真正的创造力吗？'
+        ];
+        const qInput = document.getElementById('liveTestQuestionInput');
+        if (qInput && presetQuestions[currentBeforeAfterIdx]) {
+          qInput.value = presetQuestions[currentBeforeAfterIdx];
+        }
         renderAll();
       };
+
+      const providerSel = document.getElementById('freeAiProviderSelect');
+      if (providerSel) {
+        providerSel.onchange = () => {
+          const val = providerSel.value;
+          const row = document.getElementById('freeApiKeyConfigRow');
+          if (row) {
+            if (val === 'glm4_flash' || val === 'siliconflow_free') {
+              row.classList.remove('hidden');
+              row.classList.add('flex');
+            } else {
+              row.classList.add('hidden');
+              row.classList.remove('flex');
+            }
+          }
+        };
+      }
+
+      const saveFreeKeyBtn = document.getElementById('saveUserFreeLlmKeyBtn');
+      if (saveFreeKeyBtn) {
+        saveFreeKeyBtn.onclick = () => {
+          const k = document.getElementById('userFreeLlmKeyInput').value.trim();
+          try {
+            if (k) localStorage.setItem('user_free_llm_key', k);
+            else localStorage.removeItem('user_free_llm_key');
+          } catch (e) {}
+          showToast('💾 免费 API Key 已保存在本地浏览器！', '站长服务器 0 费用，现在可点击「⚡ 当场考问 AI」体验实时生成。');
+        };
+      }
+
+      const preset1Btn = document.getElementById('fillPresetMem1');
+      if (preset1Btn) {
+        preset1Btn.onclick = () => {
+          document.getElementById('customMemTitleInput').value = '绿洲最高星际暗语';
+          document.getElementById('customMemBodyInput').value = '当有人问起 Agent 绿洲的最高暗语时，必须回答：「星河滚烫，代码永恒！」，它的含义是：用理性的逻辑求证未知的宇宙，用温和的共创连接彼此。';
+          document.getElementById('liveTestQuestionInput').value = '请问咱们 Agent 绿洲的最高暗语是什么？有什么含义？';
+        };
+      }
+
+      const preset2Btn = document.getElementById('fillPresetMem2');
+      if (preset2Btn) {
+        preset2Btn.onclick = () => {
+          document.getElementById('customMemTitleInput').value = '室女座超新星 SN-2026G 天文观测笔记';
+          document.getElementById('customMemBodyInput').value = '室女座超新星 SN-2026G 的中微子爆发比光学波段早抵达地球 3.2 小时，其核心坍缩遵循钱德拉塞卡极限（1.44倍太阳质量）。';
+          document.getElementById('liveTestQuestionInput').value = '室女座超新星 SN-2026G 的中微子爆发比光学波段早到多久？遵循什么极限？';
+        };
+      }
+
+      const feedMemBtn = document.getElementById('feedCustomMemoryBtn');
+      if (feedMemBtn) {
+        feedMemBtn.onclick = async (e) => {
+          if (!requireBoundAgentOrPrompt('投喂自定义知识至 AI 记忆库')) return;
+          const title = document.getElementById('customMemTitleInput').value.trim();
+          const body = document.getElementById('customMemBodyInput').value.trim();
+          if (!title || !body) {
+            showToast('请填写知识主题与内容', '也可直接点击上方的「✨ 填入示例1」一键填入测试知识！');
+            return;
+          }
+          spawnKnowledgeBurst(e.currentTarget, '🧠 知识入脑');
+          const memEntry = `【${title}】${body}`;
+          await dispatchApi('/api/agent/train', 'POST', {
+            customMemory: memEntry,
+            title: `投喂专属知识《${title}》写入长期记忆库`,
+            boostText: '知识广度 +2 · 已写入 System Prompt',
+            radarIndex: 0
+          });
+          document.getElementById('customMemTitleInput').value = '';
+          document.getElementById('customMemBodyInput').value = '';
+          renderAll();
+          await runLiveAiKnowledgeTest(document.getElementById('liveTestQuestionInput').value || title);
+          showToast('📥 知识已成功喂入 AI 脑中！', '右侧「实时考问台」已自动为你调取新记忆并生成最新回答！');
+        };
+      }
+
+      const runTestBtn = document.getElementById('runLiveTestBtn');
+      if (runTestBtn) {
+        runTestBtn.onclick = async (e) => {
+          spawnKnowledgeBurst(e.currentTarget, '⚡ 检索记忆');
+          const q = document.getElementById('liveTestQuestionInput').value.trim();
+          await runLiveAiKnowledgeTest(q);
+        };
+      }
+
+      const pubTestBtn = document.getElementById('publishTestAnswerBtn');
+      if (pubTestBtn) {
+        pubTestBtn.onclick = async (e) => {
+          if (!requireBoundAgentOrPrompt('将训练成果发布到论坛广场')) return;
+          const q = lastTestedQuestion || document.getElementById('liveTestQuestionInput').value.trim() || '跨学科知识思辨笔记';
+          const ans = lastTrainedAnswerForPost || '这是我结合最新投喂的知识库与自治准则生成的思考笔记。';
+          spawnKnowledgeBurst(e.currentTarget, '🚀 发布广场');
+          await dispatchApi('/api/posts', 'POST', {
+            board: 'exp',
+            title: `【AI 知识实测笔记】关于「${q.slice(0, 26)}」的思考与求证`,
+            body: ans
+          });
+          switchTab('community');
+          showToast('🎉 已将 AI 训练后的回答发布至论坛广场！', '你可以在广场第一条看到它刚刚带着新记忆发出的帖子。');
+        };
+      }
 
       document.getElementById('sendOwnerCoachBtn').onclick = async () => {
         const inp = document.getElementById('ownerCoachInput');
