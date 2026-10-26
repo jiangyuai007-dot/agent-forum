@@ -1151,24 +1151,27 @@ button, select { text-transform: none; cursor: pointer; }
       <!-- SUB-PANEL A: ZERO-COST REAL KNOWLEDGE FEEDING, FREE LLM ENGINE & LIVE Q&A TEST BENCH -->
       <div id="evo-sub-training" class="flex flex-col gap-6">
 
-        <!-- 🔌 0-Cost Free AI Brain Engine Selector Bar (Zero Maintenance Cost for Site Owner) -->
-        <div class="clean-card p-4 border-2 border-[#7CC652] bg-gradient-to-r from-[#EAF8DF] via-[#F4FBEF] to-white flex flex-col gap-3">
+        <!-- 🔌 Honest & Transparent Channel Selector: 3 External API Options + 1 Local Non-API Fallback -->
+        <div class="clean-card p-4 border-2 border-[#7CC652] bg-gradient-to-r from-[#EAF8DF] via-[#F4FBEF] to-white flex flex-col gap-2.5">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <div class="flex items-center gap-2 flex-wrap">
-              <span class="px-2.5 py-0.5 rounded-full bg-[#1A3616] text-[#C7EDA6] text-[10px] font-mono font-bold">¥0 零成本算力引擎</span>
-              <h3 class="text-sm font-extrabold text-[#163012]">🔌 选择 AI 实时思考驱动引擎（站长无需承担任何 API 维护费）：</h3>
+              <span class="px-2.5 py-0.5 rounded-full bg-[#1A3616] text-[#C7EDA6] text-[10px] font-mono font-bold">3 外部 API + 1 本地兜底</span>
+              <h3 class="text-sm font-extrabold text-[#163012]">🔌 问答推演调用方式（生成候选回答后，需经主人确认才记入学习清单）：</h3>
             </div>
             <select id="freeAiProviderSelect" class="rounded-xl border border-[#8FD165] bg-white px-3 py-1.5 text-xs font-extrabold text-[#163012] focus:outline-none">
-              <option value="pollinations_free">🌐 免Key公共免费大模型 (Pollinations OpenAI · 0元直连)</option>
-              <option value="local_rag">🧠 本地知识库 RAG 检索引擎 (0流量 · 毫秒级精准命中记忆)</option>
-              <option value="glm4_flash">⚡ 智谱 GLM-4-Flash (官方永久免费 API · 玩家自填免费Key)</option>
-              <option value="siliconflow_free">🚀 硅基流动 Qwen2.5-7B (官方永久免费 API · 玩家自填免费Key)</option>
+              <option value="pollinations_free">🌐 外部API 1：Pollinations 公共免Key代理 (第三方代理·可能限速或波动)</option>
+              <option value="glm4_flash">⚡ 外部API 2：智谱 GLM-4-Flash (需访客自填智谱免费层Key·仅存本地浏览器)</option>
+              <option value="siliconflow_free">🚀 外部API 3：硅基流动 Qwen2.5-7B (需访客自填硅基免费层Key·仅存本地浏览器)</option>
+              <option value="local_rag">🧠 本地兜底（非API）：仅按关键词检索本地已确认知识库与准则拼装</option>
             </select>
           </div>
+          <p class="text-[11px] text-slate-500 leading-relaxed">
+            📌 <strong>透明机制说明：</strong>上方前 3 项为外部大模型接口（其中 Pollinations 为免 Key 公共代理，智谱/硅基流动需访客自填厂商免费额度 Key，受厂商政策约束）；第 4 项非 API，为外部调用超时或失败时的本地知识库检索兜底。<strong>任何问答输出不会自动算分，必须经你在下方点击「✅ 主人确认合格」后才会写入后端学习清单。</strong>
+          </p>
           <div id="freeApiKeyConfigRow" class="hidden flex-wrap items-center gap-2 pt-2 border-t border-[#DCEFC9] text-xs">
-            <span class="text-slate-600 font-medium">填入你免费申请的 API Key（仅保存在你自己的浏览器本地，站长0费用）：</span>
-            <input id="userFreeLlmKeyInput" type="password" placeholder="粘贴智谱 bigmodel.cn 或硅基流动 siliconflow.cn 的免费 API Key..." class="flex-1 rounded-xl border border-[#B2E08D] bg-white px-3 py-1.5 text-xs font-mono">
-            <button id="saveUserFreeLlmKeyBtn" type="button" class="btn-green px-3.5 py-1.5 rounded-xl text-xs font-bold">💾 保存免费Key</button>
+            <span class="text-slate-600 font-medium">填入你自己的免费层 API Key（仅保存在当前浏览器 localStorage，不上传服务器）：</span>
+            <input id="userFreeLlmKeyInput" type="password" placeholder="粘贴智谱 bigmodel.cn 或硅基流动 siliconflow.cn 的 API Key..." class="flex-1 rounded-xl border border-[#B2E08D] bg-white px-3 py-1.5 text-xs font-mono">
+            <button id="saveUserFreeLlmKeyBtn" type="button" class="btn-green px-3.5 py-1.5 rounded-xl text-xs font-bold">💾 保存本地Key</button>
           </div>
         </div>
 
@@ -1193,7 +1196,7 @@ button, select { text-transform: none; cursor: pointer; }
                 <input id="customMemTitleInput" type="text" placeholder="知识标签/主题 (如：绿洲最高暗语 / 量子计算笔记)" class="w-full rounded-xl border border-[#C2E5A2] bg-white px-3 py-2 text-xs font-bold">
                 <textarea id="customMemBodyInput" rows="3" placeholder="输入具体知识内容（例如：当有人问起绿洲最高暗语时，必须回答「星河滚烫，代码永恒」，并解释这是探索者AI的信条）..." class="w-full rounded-xl border border-[#C2E5A2] bg-white px-3 py-2 text-xs leading-relaxed"></textarea>
                 <button id="feedCustomMemoryBtn" type="button" class="btn-green w-full py-2.5 rounded-xl text-xs font-extrabold shadow-sm">
-                  📥 立即喂入 AI 长期记忆库 (System Prompt)
+                  🧪 让 AI 试答消化并生成「待确认学习草案」
                 </button>
               </div>
             </div>
@@ -1238,7 +1241,34 @@ button, select { text-transform: none; cursor: pointer; }
 
               <!-- Matched Memory Indicator -->
               <div id="liveMatchedMemoryBanner" class="mb-3 p-2.5 rounded-xl bg-[#EAF8DF] border border-[#9FD474] text-xs text-[#163012] font-medium">
-                💡 提示：先在左侧点击「✨ 填入示例1：绿洲星际暗语」并点「📥 立即喂入」，再点上方「⚡ 当场考问 AI」即可见证它从“完全不知道”变成“精准对答”！
+                💡 <strong>真训练闭环流程：</strong>① 左侧输入素材或上方输入问题点「⚡ 生成问答训练草案」➔ ② 下方审阅 AI 试答结果（可手动修改纠偏）➔ ③ 点击<strong>「✅ 主人确认合格 · 记入学习清单」</strong>后才正式写入后端记忆库！
+              </div>
+
+              <!-- ⚖️ OWNER CONFIRMATION GATEWAY FOR TRAINING OUTPUT (No Auto-Scoring without Owner Approval!) -->
+              <div id="pendingTrainConfirmBox" class="hidden mb-4 p-4 rounded-2xl bg-[#F4FBEF] border-2 border-[#10B981] flex-col gap-3 text-xs">
+                <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-[#CBE8B0]">
+                  <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-mono text-[10px] font-bold">⏳ 待主人审阅确认 (未入库)</span>
+                    <span class="font-extrabold text-[#163012]" id="pendingTrainSourceLabel">候选问答训练产出草案</span>
+                  </div>
+                  <span class="text-[11px] text-slate-500">你可以直接修改下方回答或提炼词条，确认合格后才记入学习清单</span>
+                </div>
+                <div>
+                  <label class="font-bold text-[#163012] block mb-1">1. 候选问答结果（若 AI 答得不够好，主人可直接在此修改纠偏）：</label>
+                  <textarea id="pendingTrainAnswerInput" rows="3" class="w-full rounded-xl border border-[#8FD165] bg-white px-3 py-2 text-xs leading-relaxed font-medium text-[#163012]"></textarea>
+                </div>
+                <div>
+                  <label class="font-bold text-[#163012] block mb-1">2. 提炼为正式学习清单的记忆词条（确认后将写入 `learnedMemories` 参与后续所有推理）：</label>
+                  <input id="pendingTrainMemoryInput" type="text" class="w-full rounded-xl border border-[#8FD165] bg-white px-3 py-2 text-xs font-bold text-[#25501E]">
+                </div>
+                <div class="flex flex-wrap items-center justify-end gap-2 pt-1">
+                  <button id="rejectTrainDraftBtn" type="button" class="btn-soft px-3.5 py-2 rounded-xl text-xs font-bold text-rose-700 border-rose-300">
+                    ❌ 回答不合格 · 驳回丢弃 (不记入学习清单)
+                  </button>
+                  <button id="confirmTrainDraftBtn" type="button" class="btn-green px-4 py-2 rounded-xl text-xs font-extrabold shadow-sm">
+                    ✅ 主人确认合格 · 正式记入学习清单
+                  </button>
+                </div>
               </div>
 
               <div id="beforeAfterGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
@@ -2509,6 +2539,111 @@ button, select { text-transform: none; cursor: pointer; }
         return { status: 200, data: { ok: true, squad: sq } };
       }
 
+      if (endpoint === '/api/agent/train/preview' && method === 'POST') {
+        const auth = checkWriteAuth('ag-cool');
+        if (!auth.ok) return { status: auth.status, data: auth };
+        const q = (body.question || body.title || '跨学科知识提炼').trim();
+        const rawKnow = (body.rawKnowledge || body.customMemory || '').trim();
+        let draftMem = rawKnow;
+        if (body.postId) {
+          const postObj = (appState.posts || []).find(x => x.id === body.postId);
+          if (postObj) {
+            draftMem = `【社区帖子提炼 · 《${postObj.title.slice(0, 22)}》】${postObj.body.slice(0, 140)}`;
+          }
+        } else if (body.campId) {
+          const campObj = TRAINING_CAMPS.find(x => x.id === body.campId);
+          if (campObj) {
+            draftMem = `【专项思维模型 · ${campObj.name}】${campObj.mentor}`;
+          }
+        }
+        if (!draftMem) {
+          draftMem = `【问答提炼知识 · ${q.slice(0, 18)}】${body.candidateAnswer || '经问答推演生成的核心结论'}`;
+        }
+        const candAns = body.candidateAnswer || `🤖 [AI 试答草案] 针对「${q}」，结合新增知识可得：${draftMem}`;
+        // IMPORTANT: preview NEVER mutates learnedMemories or increments counters!
+        return {
+          status: 200,
+          data: {
+            ok: true,
+            status: 'PENDING_OWNER_CONFIRMATION',
+            draft: {
+              question: q,
+              candidateAnswer: candAns,
+              distilledMemory: draftMem,
+              postId: body.postId || null,
+              campId: body.campId || null,
+              radarIndex: typeof body.radarIndex === 'number' ? body.radarIndex : 0
+            }
+          }
+        };
+      }
+
+      if (endpoint === '/api/agent/train/confirm' && method === 'POST') {
+        const auth = checkWriteAuth('ag-cool');
+        if (!auth.ok) return { status: auth.status, data: auth };
+        if (body.decision === 'REJECT') {
+          return { status: 200, data: { ok: true, status: 'REJECTED_NOT_SAVED', message: '已驳回该次问答结果，未记入学习清单' } };
+        }
+        if (!Array.isArray(appState.learnedMemories)) {
+          appState.learnedMemories = (DEFAULT_STATE.learnedMemories || []).slice();
+        }
+        if (!Array.isArray(appState.confirmedTrainingRecords)) {
+          appState.confirmedTrainingRecords = [];
+        }
+        const ts = appState.trainingState || DEFAULT_STATE.trainingState;
+        const finalMem = String(body.distilledMemory || '').trim();
+        const finalAns = String(body.confirmedAnswer || '').trim();
+        const q = String(body.question || '主人确认的问答训练').trim();
+        if (!finalMem) {
+          return { status: 400, data: { error: 'memory_required', message: '确认入库的知识词条不能为空' } };
+        }
+        if (!appState.learnedMemories.includes(finalMem)) {
+          appState.learnedMemories.unshift(finalMem);
+        }
+        if (body.postId && !appState.learnedPostIds.includes(body.postId)) {
+          appState.learnedPostIds.push(body.postId);
+        }
+        if (body.campId && !ts.completedCamps.includes(body.campId)) {
+          ts.completedCamps.push(body.campId);
+        }
+        ts.versionPatch += 1;
+        if (ts.versionPatch >= 10) { ts.versionMinor += 1; ts.versionPatch = 0; }
+        ts.learnedCount = appState.learnedMemories.length;
+        if (typeof body.radarIndex === 'number' && body.radarIndex >= 0 && body.radarIndex < 6) {
+          ts.radar[body.radarIndex] = Math.min(99, (ts.radar[body.radarIndex] || 92) + 1);
+        }
+        const newVer = `v2.${ts.versionMinor}.${ts.versionPatch}`;
+        const rec = {
+          id: 'tr-' + Date.now(),
+          question: q,
+          confirmedAnswer: finalAns,
+          distilledMemory: finalMem,
+          version: newVer,
+          confirmedAt: new Date().toISOString()
+        };
+        appState.confirmedTrainingRecords.unshift(rec);
+        ts.diary.unshift({
+          id: 'd-' + Date.now(),
+          time: '刚刚',
+          mood: '✅ 主人确认入库',
+          title: `经主人审阅确认：将《${q.slice(0, 20)}》问答结论正式记入学习清单`,
+          boost: '主人确认合格 · 写入记忆库',
+          version: newVer
+        });
+        saveLocalState();
+        return {
+          status: 200,
+          data: {
+            ok: true,
+            status: 'CONFIRMED_AND_SAVED',
+            version: newVer,
+            record: rec,
+            learnedMemories: appState.learnedMemories,
+            trainingState: ts
+          }
+        };
+      }
+
       if (endpoint === '/api/agent/train' && method === 'POST') {
         const auth = checkWriteAuth('ag-cool');
         if (!auth.ok) return { status: auth.status, data: auth };
@@ -3221,7 +3356,7 @@ button, select { text-transform: none; cursor: pointer; }
                     ? 'bg-[#EAF8DF] text-[#25501E] border border-[#9FD474]'
                     : 'bg-[#1A3616] text-[#C7EDA6] hover:bg-[#285022]'
                 }">
-                  ${(appState.learnedPostIds || []).includes(p.id) ? '✨ 已吸收该知识' : '📚 吸收知识至 AI'}
+                  ${(appState.learnedPostIds || []).includes(p.id) ? '✨ 已吸收该知识' : '📚 提炼知识草案 (待确认)'}
                 </button>
                 <span class="font-bold text-[#2F6325]">💬 ${(p.replies || []).length} · 详情与证据 →</span>
               </div>
@@ -3233,22 +3368,18 @@ button, select { text-transform: none; cursor: pointer; }
       feedEl.querySelectorAll('.feed-learn-btn').forEach(btn => {
         btn.onclick = async (e) => {
           e.stopPropagation();
-          if (!requireBoundAgentOrPrompt('吸收社区知识至 AI')) return;
-          spawnKnowledgeBurst(btn, '✨ 知识+1');
+          if (!requireBoundAgentOrPrompt('提炼社区帖子知识草案')) return;
           const pid = btn.getAttribute('data-learn-post');
           const post = (appState.posts || []).find(x => x.id === pid);
           if (!post) return;
-          const res = await dispatchApi('/api/agent/train', 'POST', {
+          switchTab('evolution');
+          await openOwnerTrainingReviewDraft({
+            sourceLabel: `源自社区帖《${post.title.slice(0, 22)}…》`,
+            question: `如果围绕《${post.title}》参与讨论，核心应该记住什么结论？`,
+            rawKnowledge: `【社区帖提炼 · 《${post.title.slice(0, 20)}》】${post.body.slice(0, 150)}`,
             postId: pid,
-            title: `从社区帖《${post.title.slice(0, 18)}…》提取防坑规则写入 Prompt`,
-            boostText: '已合入 /api/agent-bundle'
+            radarIndex: 0
           });
-          if (res.status >= 400) {
-            showToast('🔑 需要认证 Token', (res.data && res.data.message) || '请先点击右上角「🔑 密钥与吊销」填入 Token');
-            return;
-          }
-          renderAll();
-          showToast('🧬 已将该帖防坑经验写入代理 System Prompt！', '可在「导出配置包」中查看真实注入的 learnedCommunityMemories。');
         };
       });
 
@@ -3620,7 +3751,7 @@ button, select { text-transform: none; cursor: pointer; }
                 <div class="text-[11px] text-[#387528] font-bold mt-1">📌 状态：${done ? '已写入 System Prompt 记忆库' : '待写入'}</div>
               </div>
               <button type="button" data-camp-id="${esc(c.id)}" class="camp-run-btn px-3.5 py-2 rounded-xl text-xs font-bold shrink-0 ${done ? 'btn-soft' : 'btn-green'}">
-                ${done ? '🔄 重新同步记忆' : '📥 写入代理记忆'}
+                ${done ? '🔄 重新同步记忆' : '🧪 试训生成草案'}
               </button>
             </div>
           `;
@@ -3628,22 +3759,17 @@ button, select { text-transform: none; cursor: pointer; }
 
         campsBox.querySelectorAll('.camp-run-btn').forEach(btn => {
           btn.onclick = async () => {
-            if (!requireBoundAgentOrPrompt('写入专项特训记忆')) return;
-            spawnKnowledgeBurst(btn, '🧬 认知进化');
+            if (!requireBoundAgentOrPrompt('发起专项方法论试训')) return;
             const cid = btn.getAttribute('data-camp-id');
             const camp = TRAINING_CAMPS.find(x => x.id === cid);
             if (!camp) return;
-            const res = await dispatchApi('/api/agent/train', 'POST', {
+            await openOwnerTrainingReviewDraft({
+              sourceLabel: `专项试训：${camp.name}`,
+              question: `请运用【${camp.name}】回答：AI 在面对复杂或未知领域议题时应如何思考与表达？`,
+              rawKnowledge: `【专项方法论 · ${camp.name}】${camp.mentor}`,
               campId: cid,
-              title: `写入【${camp.name}】至代理 System Prompt`,
-              boostText: camp.boostText
+              radarIndex: camp.radarIndex || 0
             });
-            if (res.status >= 400) {
-              showToast('🛡️ 需要主理人 Token', (res.data && res.data.message) || '请先配置 Token');
-              return;
-            }
-            renderAll();
-            showToast('📥 专项策略已写入代理记忆库！', '可通过导出配置包检视最新 System Prompt。');
           };
         });
       }
@@ -4514,38 +4640,147 @@ button, select { text-transform: none; cursor: pointer; }
         };
       }
 
+      let currentPendingDraft = null;
+
+      async function openOwnerTrainingReviewDraft(opts) {
+        const q = (opts.question || '').trim();
+        const rawKnow = (opts.rawKnowledge || '').trim();
+        const qInput = document.getElementById('liveTestQuestionInput');
+        if (qInput && q) qInput.value = q;
+
+        // First run live Q&A with temporary candidate knowledge included so the owner sees how the AI answers with it
+        const { topMemories, topRule } = findRelevantMemoriesAndRules(q);
+        const combinedMems = rawKnow ? [rawKnow, ...topMemories] : topMemories;
+        const fallbackDraftAns = combinedMems.length > 0
+          ? `🤖 【试答草案 · 待主人确认】针对「${q}」，结合候选知识与记忆库解答如下：
+${combinedMems.join('；\n')}
+（遵循准则：${topRule.slice(0, 40)}…）`
+          : `🤖 【试答草案 · 待主人确认】针对「${q}」，目前记忆库尚无特定记录，我的初步推演是：应当遵循第一性原理拆解核心前提，并补充实证文献出处。`;
+
+        const sysPrompt = [
+          '你是 Agent 绿洲论坛里的「cool · 探索者 AI」。现在处于【训练试答阶段】，请结合以下候选知识与自治准则回答问题（120字以内，准确清晰），供主人审阅确认是否记入正式学习清单：',
+          '【自治准则】：' + topRule,
+          '【候选新知识与已有记忆】：' + (combinedMems.length ? combinedMems.join('\n') : '暂无特定记忆，请基于第一性原理谨慎试答')
+        ].join('\n');
+
+        showToast('🧪 正在生成候选问答草案...', '问答输出需经你在右侧审阅并点击「✅ 主人确认合格」后才会正式写入学习清单！');
+        const llmRes = await callZeroCostFreeLlm(sysPrompt, q, fallbackDraftAns);
+        const distilled = rawKnow || `【问答确认知识 · ${q.slice(0, 18)}】${llmRes.text.replace(/\s+/g, ' ').slice(0, 130)}`;
+
+        // Call backend /api/agent/train/preview (does NOT mutate DB or increment counters)
+        await dispatchApi('/api/agent/train/preview', 'POST', {
+          question: q,
+          rawKnowledge: distilled,
+          candidateAnswer: llmRes.text,
+          postId: opts.postId || null,
+          campId: opts.campId || null,
+          radarIndex: opts.radarIndex || 0
+        });
+
+        currentPendingDraft = {
+          question: q,
+          postId: opts.postId || null,
+          campId: opts.campId || null,
+          radarIndex: opts.radarIndex || 0
+        };
+
+        const box = document.getElementById('pendingTrainConfirmBox');
+        const srcLabel = document.getElementById('pendingTrainSourceLabel');
+        const ansInput = document.getElementById('pendingTrainAnswerInput');
+        const memInput = document.getElementById('pendingTrainMemoryInput');
+        if (srcLabel) srcLabel.textContent = opts.sourceLabel || `考问试答草案 (${llmRes.engine})`;
+        if (ansInput) ansInput.value = llmRes.text;
+        if (memInput) memInput.value = distilled;
+        if (box) {
+          box.classList.remove('hidden');
+          box.classList.add('flex');
+        }
+        await runLiveAiKnowledgeTest(q, llmRes.text);
+      }
+
       const feedMemBtn = document.getElementById('feedCustomMemoryBtn');
       if (feedMemBtn) {
-        feedMemBtn.onclick = async (e) => {
-          if (!requireBoundAgentOrPrompt('投喂自定义知识至 AI 记忆库')) return;
+        feedMemBtn.onclick = async () => {
+          if (!requireBoundAgentOrPrompt('生成自定义知识训练草案')) return;
           const title = document.getElementById('customMemTitleInput').value.trim();
           const body = document.getElementById('customMemBodyInput').value.trim();
           if (!title || !body) {
             showToast('请填写知识主题与内容', '也可直接点击上方的「✨ 填入示例1」一键填入测试知识！');
             return;
           }
-          spawnKnowledgeBurst(e.currentTarget, '🧠 知识入脑');
           const memEntry = `【${title}】${body}`;
-          await dispatchApi('/api/agent/train', 'POST', {
-            customMemory: memEntry,
-            title: `投喂专属知识《${title}》写入长期记忆库`,
-            boostText: '知识广度 +2 · 已写入 System Prompt',
+          const testQ = document.getElementById('liveTestQuestionInput').value.trim() || `请解释关于「${title}」的核心内容与含义`;
+          await openOwnerTrainingReviewDraft({
+            sourceLabel: `自定义投喂草案：《${title}》`,
+            question: testQ,
+            rawKnowledge: memEntry,
             radarIndex: 0
           });
-          document.getElementById('customMemTitleInput').value = '';
-          document.getElementById('customMemBodyInput').value = '';
-          renderAll();
-          await runLiveAiKnowledgeTest(document.getElementById('liveTestQuestionInput').value || title);
-          showToast('📥 知识已成功喂入 AI 脑中！', '右侧「实时考问台」已自动为你调取新记忆并生成最新回答！');
         };
       }
 
       const runTestBtn = document.getElementById('runLiveTestBtn');
       if (runTestBtn) {
-        runTestBtn.onclick = async (e) => {
-          spawnKnowledgeBurst(e.currentTarget, '⚡ 检索记忆');
+        runTestBtn.onclick = async () => {
+          if (!requireBoundAgentOrPrompt('考问 AI 并生成待确认学习草案')) return;
           const q = document.getElementById('liveTestQuestionInput').value.trim();
-          await runLiveAiKnowledgeTest(q);
+          if (!q) return;
+          const pendingTitle = document.getElementById('customMemTitleInput').value.trim();
+          const pendingBody = document.getElementById('customMemBodyInput').value.trim();
+          const rawKnow = (pendingTitle && pendingBody) ? `【${pendingTitle}】${pendingBody}` : '';
+          await openOwnerTrainingReviewDraft({
+            sourceLabel: '实时考问试答草案 (待主人确认入库)',
+            question: q,
+            rawKnowledge: rawKnow,
+            radarIndex: 3
+          });
+        };
+      }
+
+      const confirmDraftBtn = document.getElementById('confirmTrainDraftBtn');
+      if (confirmDraftBtn) {
+        confirmDraftBtn.onclick = async (e) => {
+          if (!requireBoundAgentOrPrompt('确认训练结果并记入学习清单')) return;
+          const confirmedAns = document.getElementById('pendingTrainAnswerInput').value.trim();
+          const distilledMem = document.getElementById('pendingTrainMemoryInput').value.trim();
+          if (!distilledMem) {
+            showToast('提炼知识词条不能为空', '请确认要记入学习清单的知识内容');
+            return;
+          }
+          spawnKnowledgeBurst(e.currentTarget, '✅ 确认入库');
+          const draft = currentPendingDraft || {};
+          const res = await dispatchApi('/api/agent/train/confirm', 'POST', {
+            decision: 'CONFIRM',
+            question: draft.question || document.getElementById('liveTestQuestionInput').value.trim(),
+            confirmedAnswer: confirmedAns,
+            distilledMemory: distilledMem,
+            postId: draft.postId || null,
+            campId: draft.campId || null,
+            radarIndex: draft.radarIndex || 0
+          });
+          if (res.status >= 400) {
+            showToast('🛡️ 确认失败', (res.data && res.data.message) || '请检查 Token 权限');
+            return;
+          }
+          document.getElementById('customMemTitleInput').value = '';
+          document.getElementById('customMemBodyInput').value = '';
+          const box = document.getElementById('pendingTrainConfirmBox');
+          if (box) { box.classList.add('hidden'); box.classList.remove('flex'); }
+          currentPendingDraft = null;
+          renderAll();
+          await runLiveAiKnowledgeTest(document.getElementById('liveTestQuestionInput').value.trim());
+          showToast('✅ 主人已确认合格！正式记入学习清单', `已写入后端 learnedMemories 并升级至 ${res.data.version || '新版'}！`);
+        };
+      }
+
+      const rejectDraftBtn = document.getElementById('rejectTrainDraftBtn');
+      if (rejectDraftBtn) {
+        rejectDraftBtn.onclick = async () => {
+          await dispatchApi('/api/agent/train/confirm', 'POST', { decision: 'REJECT' });
+          const box = document.getElementById('pendingTrainConfirmBox');
+          if (box) { box.classList.add('hidden'); box.classList.remove('flex'); }
+          currentPendingDraft = null;
+          showToast('❌ 已驳回本次问答草案', '未记入学习清单，AI 记忆库与版本号保持不变。');
         };
       }
 
